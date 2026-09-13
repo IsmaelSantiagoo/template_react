@@ -3,8 +3,6 @@ import packageJson from "../../../package.json";
 import { EllipsisVerticalIcon, LogOutIcon, MoonIcon } from 'lucide-react';
 import { Skeleton } from '../ui/skeleton';
 
-import cobeb_profile_light from '@/assets/cobeb-profile-light.png';
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,9 +22,9 @@ import {
 } from '@/components/ui/sidebar';
 import { useAuth } from '@/hooks/use-auth';
 
+import { Theme, useTheme } from "@/hooks/use-theme";
 import { formatCPF } from '@/utils/formatters';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import { Theme, useTheme } from "@/hooks/use-theme";
 
 export function SidebarUser() {
   const { isMobile } = useSidebar()
@@ -43,7 +41,7 @@ export function SidebarUser() {
               className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground'
             >
               <Avatar>
-                <AvatarImage src={cobeb_profile_light} />
+                <AvatarImage src={''} />
                 <AvatarFallback>{user?.nome.charAt(0).concat(user?.nome.charAt(1) || '').toUpperCase()}</AvatarFallback>
               </Avatar>
               <div className='grid flex-1 text-left text-sm leading-tight'>
