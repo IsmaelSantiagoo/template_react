@@ -1,0 +1,24 @@
+import { Navigate } from 'react-router-dom'
+
+import { useAuth } from '@/hooks/use-auth'
+import { getHomeByRole } from '@/routes/utils'
+import { LoaderCircleIcon } from 'lucide-react'
+
+/**
+ * Componente que redireciona o usuário para a home apropriada baseada no seu role.
+ * Usado nas rotas raiz (/) para direcionar o usuário após autenticação.
+ */
+export function RoleRedirect() {
+  const { isAuthenticated, loading, user } = useAuth()
+
+  if (loading) {
+    return <LoaderCircleIcon className="animate-spin" />
+  }
+
+  if (!isAuthenticated) {
+    // Redireciona para login e mantém a rota original no estado para redirecionamento pós-login
+    return <Navigate to="/auth/login" state={{ from: window.location.pathname }} replace />
+  }
+
+  return <Navigate to={getHomeByRole(user?.role)} replace />
+}

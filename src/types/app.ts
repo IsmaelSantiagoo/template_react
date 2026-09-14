@@ -4,7 +4,7 @@ export type Usuario = {
   id: string;
   nome: string;
   cpf: string;
-  role: 'administrador' | 'comum';
+  role: 'admin' | 'common';
   primeiro_acesso: boolean;
 }
 

@@ -1,17 +1,65 @@
 import AppLayout from '@/pages/layout'
-import NotFound from '@/pages/NotFound'
+import NotFound from '@/pages/not-found'
 import { createBrowserRouter } from 'react-router-dom'
 
+import MobileLayout from '@/pages/mobile-layout'
+import PWAInstall from '@/pages/pwa-install'
+import PWAInstallGuide from '@/pages/pwa-install/guide'
+import { adminRoutes } from './admin'
+import { authRoutes } from './auth'
+import { clientRoutes } from './client'
+import { GuestRoute, ProtectedRoute, RoleRedirect } from './guards'
+
 const router = createBrowserRouter([
+  // Rota raiz - redireciona baseado no role
   {
     path: '/',
-    element: <AppLayout />,
+    element: <RoleRedirect />,
+  },
+
+  // Rotas públicas (login, registro, etc)
+  {
+    element: <GuestRoute />,
+    children: authRoutes,
+  },
+
+  // Rotas de Admin (monitoramento)
+  {
+    path: '/admin',
+    element: <ProtectedRoute allowedRoles={['admin', 'common']} />,
+    children: [
+      {
+        element: <AppLayout />,
+        children: adminRoutes,
+      },
+    ],
+  },
+
+  // Rotas de Cliente
+  {
+    path: '/client',
+    element: <ProtectedRoute allowedRoles={['common']} />,
+    children: [
+      {
+        element: <MobileLayout />,
+        children: clientRoutes,
+      },
+    ],
+  },
+
+  // Rota para instalar o app no celular (PWA)
+  {
+    path: '/install',
     children: [
       {
         path: '',
-        element: <NotFound />, // Replace with your default page or redirect
+        element: <PWAInstall />,
       },
-    ],
+      {
+        path: 'guide',
+        element: <PWAInstallGuide />
+      }
+    ]
   },
 
   // 404 - Not Found

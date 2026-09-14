@@ -31,12 +31,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <Link to='/admin/avarias' className='flex flex-col gap-3'>
+            <Link to='/' className='flex flex-col gap-3'>
               <Logo className='w-40' variant='light' />
               {loading ? (
                 <Skeleton className='w-full p-2' />
               ) : (
-                <p className='text-base font-semibold'>Gestão de Reposição</p>
+                <p className='text-base font-semibold'>{import.meta.env.VITE_APP_NAME ?? 'Template App'}</p>
               )}
             </Link>
           </SidebarMenuItem>
