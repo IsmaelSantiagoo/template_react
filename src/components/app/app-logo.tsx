@@ -1,6 +1,9 @@
 import { useTheme } from '@/hooks/use-theme'
 import { cn } from '@/lib/utils'
 
+import LogoLight from '@/assets/logo-light.svg?react'
+import LogoDark from '@/assets/logo-dark.svg?react'
+
 interface LogoProps {
   className?: string
   variant?: 'light' | 'dark'
