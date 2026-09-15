@@ -1,9 +1,9 @@
 import vanillaAxios, { type AxiosRequestHeaders } from 'axios'
 import { toast } from 'sonner'
 
-const apiBaseUrl = import.meta.env.API_URL
+const apiBaseUrl = import.meta.env.VITE_API_URL
 
-if (!apiBaseUrl) throw new Error('API_URL is not defined')
+if (!apiBaseUrl) throw new Error('VITE_API_URL is not defined')
 
 const axios = vanillaAxios.create({
   baseURL: apiBaseUrl,
